@@ -62,7 +62,7 @@ export const handleUserLogin = async (
 
       setUser(jwtDecode(result.data?.AuthenticationResult?.IdToken));
 
-      router.push("/app");
+      router.push("/game");
     }
   } catch (err) {
     console.log(err);

@@ -6,7 +6,7 @@ const UnauthenticatedPageContainer = ({ children }) => {
 
   useEffect(() => {
     if (localStorage.getItem("id-token")) {
-      router.push("/app");
+      router.push("/game");
     }
   }, []);
 

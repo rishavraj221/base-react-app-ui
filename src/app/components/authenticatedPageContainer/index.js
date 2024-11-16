@@ -26,21 +26,21 @@ const AuthenticatedPageContainer = ({ children }) => {
   const handleTokenRefresh = useCallback(async () => {
     try {
       const result = await refreshToken({
-        email: user?.email,
+        email: jwtDecode(localStorage.getItem("id-token"))?.email,
         refreshToken: localStorage.getItem("refresh-token"),
       }).unwrap();
 
       if (result?.data) {
         localStorage.setItem(
           "id-token",
-          result.data?.AuthenticatedResult?.IdToken
+          result.data?.AuthenticationResult?.IdToken
         );
         localStorage.setItem(
           "access-token",
-          result.data?.AuthenticatedResult?.AccessToken
+          result.data?.AuthenticationResult?.AccessToken
         );
 
-        setUser(jwtDecode(result.data?.AuthenticatedResult?.IdToken));
+        setUser(jwtDecode(result.data?.AuthenticationResult?.IdToken));
       }
     } catch (err) {
       console.log(err);
