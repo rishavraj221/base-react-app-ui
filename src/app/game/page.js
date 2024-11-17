@@ -29,7 +29,7 @@ export default function TicTacToe() {
   const dispatch = useDispatch();
   const [board, setBoard] = useState(Array(9).fill(null));
   const [isXNext, setIsXNext] = useState(true);
-  const winner = calculateWinner(board);
+  const winner = calculateWinner(board, dispatch);
 
   const handleClick = (index) => {
     if (board[index] || winner) return;
@@ -136,7 +136,7 @@ export default function TicTacToe() {
 }
 
 // Helper function to calculate the winner
-function calculateWinner(squares) {
+function calculateWinner(squares, dispatch) {
   const lines = [
     [0, 1, 2],
     [3, 4, 5],
@@ -150,6 +150,13 @@ function calculateWinner(squares) {
   for (let i = 0; i < lines.length; i++) {
     const [a, b, c] = lines[i];
     if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
+      dispatch(
+        pushToast({
+          message: `Player ${squares[a]} won!`,
+          severity: "success",
+        })
+      );
+
       return squares[a];
     }
   }
