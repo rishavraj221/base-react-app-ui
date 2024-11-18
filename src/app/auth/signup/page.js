@@ -1,5 +1,13 @@
 "use client";
 
+/**
+ * This file defines the SignupForm component using React and Formik.
+ * It includes a sign-up form with fields for name, email, password, and password confirmation.
+ * Validation is handled using Yup. The form interacts with the backend to register new users
+ * by making use of the useSignupMutation hook from a Redux-based service.
+ * It uses Material-UI components for the UI and Next.js router for navigation.
+ */
+
 import React from "react";
 import {
   Button,
@@ -20,37 +28,36 @@ import UnauthenticatedPageContainer from "@/app/components/unAuthenticatedPageCo
 // Validation schema using Yup
 const validationSchema = Yup.object({
   name: Yup.string().required("Name is required"),
-  email: Yup.string()
-    .email("Invalid email address")
-    .required("Email is required"),
-  password: Yup.string()
-    .min(6, "Password must be at least 6 characters")
-    .required("Password is required"),
-  confirm_password: Yup.string()
-    .oneOf([Yup.ref("password"), null], "Passwords must match")
-    .required("Confirm password is required"),
+  email: Yup.string().email("Invalid email address").required("Email is required"),
+  password: Yup.string().min(6, "Password must be at least 6 characters").required("Password is required"),
+  confirm_password: Yup.string().oneOf([Yup.ref("password"), null], "Passwords must match").required("Confirm password is required"),
 });
 
+/**
+ * SignupForm Component
+ *
+ * This functional component renders the Sign Up form and handles user registration.
+ * @returns {JSX.Element} The signup form component
+ */
 const SignupForm = () => {
   const router = useRouter();
   const { setUser } = useStorage();
+  const [signUpUser, { isLoading }] = useSignupMutation();
 
-  const [signUpUser, { isLoading, error }] = useSignupMutation();
-
+  /**
+   * handleSignUp - Submits the signup form data to the server
+   * @param {Object} values - The form field values (name, email, password, confirm_password)
+   */
   const handleSignUp = async (values) => {
     try {
       const result = await signUpUser({ body: { ...values } }).unwrap();
-
       if (result?.data?.CodeDeliveryDetails) {
-        setUser({
-          email: values.email,
-          password: values.password,
-        });
-
+        setUser({ email: values.email, password: values.password });
         router.push("/auth/verify");
       }
     } catch (err) {
-      console.log("Signup failed:", err);
+      console.error("Signup failed:", err);
+      // Handle error with user-friendly feedback (e.g., show a toast notification)
     }
   };
 
@@ -78,14 +85,7 @@ const SignupForm = () => {
             validationSchema={validationSchema}
             onSubmit={handleSignUp}
           >
-            {({
-              values,
-              errors,
-              touched,
-              handleChange,
-              handleBlur,
-              handleSubmit,
-            }) => (
+            {({ values, errors, touched, handleChange, handleBlur, handleSubmit }) => (
               <Form onSubmit={handleSubmit} style={{ width: "100%" }}>
                 <TextField
                   label="Name"
@@ -135,12 +135,8 @@ const SignupForm = () => {
                   value={values.confirm_password}
                   onChange={handleChange}
                   onBlur={handleBlur}
-                  error={
-                    touched.confirm_password && Boolean(errors.confirm_password)
-                  }
-                  helperText={
-                    touched.confirm_password && errors.confirm_password
-                  }
+                  error={touched.confirm_password && Boolean(errors.confirm_password)}
+                  helperText={touched.confirm_password && errors.confirm_password}
                 />
                 <LoadingButton
                   type="submit"
@@ -163,7 +159,7 @@ const SignupForm = () => {
             </Typography>
           </Divider>
 
-          {/* Message and Button */}
+          {/* Navigation to Login Page */}
           <Box
             sx={{
               display: "flex",
@@ -179,10 +175,7 @@ const SignupForm = () => {
               variant="text"
               color="primary"
               sx={{ ml: 1 }}
-              onClick={() => {
-                // Navigate to login page
-                router.push("/auth/login");
-              }}
+              onClick={() => router.push("/auth/login")}
             >
               Login
             </Button>

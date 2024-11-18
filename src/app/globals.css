@@ -1,3 +1,11 @@
+/* 
+  This CSS file is used to define global styles and theme settings
+  for a web application. It includes configurations for light and dark 
+  mode color schemes, base font settings, and universal element styles 
+  to ensure a consistent layout and appearance across different browsers 
+  and devices.
+*/
+
 :root {
   --background: #ffffff;
   --foreground: #171717;
@@ -12,7 +20,7 @@
 
 html,
 body {
-  max-width: 100vw;
+  max-width: 100vw;  /* Ensures that horizontal scrolling is disabled */
   overflow-x: hidden;
 }
 
@@ -20,23 +28,23 @@ body {
   color: var(--foreground);
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased; /* Enhances legibility on WebKit browsers */
+  -moz-osx-font-smoothing: grayscale;  /* Enhances legibility on macOS */
 }
 
 * {
-  box-sizing: border-box;
+  box-sizing: border-box;  /* Includes padding and border in element's total width and height */
   padding: 0;
   margin: 0;
 }
 
 a {
-  color: inherit;
-  text-decoration: none;
+  color: inherit;  /* Ensures link color inherits from parent, matching theming */
+  text-decoration: none;  /* Removes default link underline for a cleaner look */
 }
 
 @media (prefers-color-scheme: dark) {
   html {
-    color-scheme: dark;
+    color-scheme: dark;  /* Declares intended color scheme as dark */
   }
 }

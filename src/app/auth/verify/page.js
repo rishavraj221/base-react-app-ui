@@ -1,5 +1,23 @@
 "use client";
 
+/**
+ * ConfirmationCodePage Component
+ * 
+ * This component provides a user interface for confirming a user's account by 
+ * entering a 6-digit confirmation code sent via email. It uses the Formik library 
+ * for form handling and Yup for validation. Upon successful verification, it 
+ * will dispatch a toast notification and proceed to log the user in.
+ * 
+ * Dependencies:
+ * - React
+ * - Material-UI
+ * - Formik
+ * - Yup
+ * - Redux (for dispatching actions)
+ * 
+ * @returns {React.Component} ConfirmationCodePage component
+ */
+
 import React from "react";
 import { TextField, Typography, Container, Box } from "@mui/material";
 import { Formik, Form } from "formik";
@@ -23,6 +41,13 @@ const validationSchema = Yup.object({
     .required("Confirmation code is required"),
 });
 
+/**
+ * ConfirmationCodePage Functional Component
+ * 
+ * The component renders a form to input a confirmation code. Upon submission, 
+ * the code is verified through an API call. If successful, it proceeds to log 
+ * the user in.
+ */
 const ConfirmationCodePage = () => {
   const router = useRouter();
   const { user, setUser } = useStorage();
@@ -31,6 +56,14 @@ const ConfirmationCodePage = () => {
   const [verifyCode, { isLoading, error }] = useVerifyMutation();
   const [loginUser, { isLoading: isLoggingIn }] = useLoginMutation();
 
+  /**
+   * handleVerifyCode
+   * 
+   * Asynchronous function to verify the confirmation code entered by the user.
+   * On successful verification, initiates user login.
+   * 
+   * @param {Object} values - Object containing the form values
+   */
   const handleVerifyCode = async (values) => {
     try {
       const result = await verifyCode({
@@ -46,6 +79,7 @@ const ConfirmationCodePage = () => {
           })
         );
 
+        // Proceed to login the user
         await handleUserLogin(
           { email: user?.email, password: user?.password },
           loginUser,
@@ -55,7 +89,14 @@ const ConfirmationCodePage = () => {
         );
       }
     } catch (err) {
-      console.log(err);
+      // Handle the error by dispatching an error toast notification
+      dispatch(
+        pushToast({
+          message: "Verification failed. Please try again.",
+          severity: "error",
+        })
+      );
+      console.error("Verification failed:", err);
     }
   };
 

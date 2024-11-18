@@ -1,3 +1,10 @@
+/**
+ * This module exports factory functions for handling authentication-related operations.
+ * It provides endpoint factories for signup, verification, login, token refreshing,
+ * and logout functionalities. These functions are typically used to create routes
+ * or handlers in a server-side framework, providing authentication mechanisms.
+ */
+
 export {
   signup as signupEPFactory,
   verify as verifyEPFactory,

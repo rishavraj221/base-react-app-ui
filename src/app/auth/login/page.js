@@ -1,5 +1,12 @@
 "use client";
 
+/**
+ * This file contains the LoginForm component which provides a user login interface using React, Material UI, and Formik.
+ * It validates the form input using Yup schema validation, handles user login upon form submission by interacting with
+ * the Redux store and React context, and navigates the user upon successful login. Error messages are displayed appropriately.
+ * This component also includes a navigation link for users to sign up if they are new.
+ */
+
 import React from "react";
 import {
   Button,
@@ -20,6 +27,7 @@ import { useStorage } from "@/context/AppContext";
 import { jwtDecode } from "jwt-decode";
 import UnauthenticatedPageContainer from "@/app/components/unAuthenticatedPageContainer";
 
+// Schema for form validation using Yup
 const validationSchema = Yup.object({
   email: Yup.string()
     .email("Invalid email address")
@@ -29,6 +37,15 @@ const validationSchema = Yup.object({
     .required("Password is required"),
 });
 
+/**
+ * Handles login logic. Authenticates user and updates application state.
+ * 
+ * @param {Object} values - Form values containing email and password
+ * @param {Function} loginUser - Mutation function to execute user login
+ * @param {Function} dispatch - Redux dispatch function to update the store
+ * @param {Object} router - Next.js router object for navigation
+ * @param {Function} setUser - Context function to update the user state
+ */
 export const handleUserLogin = async (
   values,
   loginUser,
@@ -47,28 +64,32 @@ export const handleUserLogin = async (
         })
       );
 
-      localStorage.setItem(
-        "id-token",
-        result.data?.AuthenticationResult?.IdToken
-      );
-      localStorage.setItem(
-        "access-token",
-        result.data?.AuthenticationResult?.AccessToken
-      );
-      localStorage.setItem(
-        "refresh-token",
-        result.data?.AuthenticationResult?.RefreshToken
-      );
+      const { IdToken, AccessToken, RefreshToken } = result.data?.AuthenticationResult;
 
-      setUser(jwtDecode(result.data?.AuthenticationResult?.IdToken));
+      localStorage.setItem("id-token", IdToken);
+      localStorage.setItem("access-token", AccessToken);
+      localStorage.setItem("refresh-token", RefreshToken);
+
+      setUser(jwtDecode(IdToken));
 
       router.push("/game");
     }
   } catch (err) {
-    console.log(err);
+    // Display an error toast/message
+    dispatch(
+      pushToast({
+        message: "Login failed. Please try again.",
+        severity: "error",
+      })
+    );
+    console.error("Login error: ", err);
   }
 };
 
+/**
+ * Functional component for the Login Form.
+ * Integrates with Formik for state management and MUI components for styling.
+ */
 const LoginForm = () => {
   const router = useRouter();
   const dispatch = useDispatch();
@@ -170,7 +191,7 @@ const LoginForm = () => {
               color="primary"
               sx={{ ml: 1 }}
               onClick={() => {
-                // Navigate to login page
+                // Navigate to signup page
                 router.push("/auth/signup");
               }}
             >
