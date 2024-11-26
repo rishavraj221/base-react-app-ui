@@ -24,41 +24,6 @@
  * API request and access the result and request status.
  */
 
-// import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-// import {
-//   signupEPFactory,
-//   verifyEPFactory,
-//   loginEPFactory,
-//   refreshTokenEPFactory,
-//   logoutEPFactory,
-// } from "./endpoints";
-// import { API_BASE_URL } from "@/settings";
-
-// export const baseApi = createApi({
-//   reducerPath: "baseApi", // Path in the Redux store
-//   tagTypes: ["user"], // Caching tags for efficient store management
-//   baseQuery: fetchBaseQuery({
-//     baseUrl: API_BASE_URL, // Sets the base URL for API requests
-//   }),
-//   endpoints: (builder) => ({
-//     // Factory functions that create endpoint definition
-//     signup: signupEPFactory(builder),
-//     verify: verifyEPFactory(builder),
-//     login: loginEPFactory(builder),
-//     refreshToken: refreshTokenEPFactory(builder),
-//     logout: logoutEPFactory(builder),
-//   }),
-// });
-
-// // Hooks generated to be used in React components for performing specific API actions.
-// export const {
-//   useSignupMutation,
-//   useVerifyMutation,
-//   useLoginMutation,
-//   useRefreshTokenMutation,
-//   useLogoutMutation,
-// } = baseApi;
-
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import {
   signupEPFactory,

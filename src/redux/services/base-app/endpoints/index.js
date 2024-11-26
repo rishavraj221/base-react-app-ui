@@ -5,14 +5,6 @@
  * or handlers in a server-side framework, providing authentication mechanisms.
  */
 
-// export {
-//   signup as signupEPFactory,
-//   verify as verifyEPFactory,
-//   login as loginEPFactory,
-//   refreshToken as refreshTokenEPFactory,
-//   logout as logoutEPFactory,
-// } from "./authEPFactory";
-
 export {
   signup as signupEPFactory,
   verify as verifyEPFactory,
