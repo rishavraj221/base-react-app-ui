@@ -79,7 +79,7 @@ const HeaderComponent = () => {
             {headerData.navMenu.map(({ title, href }, index) => (
               <div
                 key={index}
-                className="block text-gray-700 hover:text-gray-500"
+                className="block cursor-pointer text-gray-700 hover:text-gray-500"
                 onClick={(e) => {
                   e.preventDefault();
                   handleSmoothScroll(href);
