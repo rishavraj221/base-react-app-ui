@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 import { Card, CardHeader, CardContent } from "@/components/ui/card";
 
-const socialProofData = {
+const componentData = {
   headline: "Trusted by Over 10,000 Happy Customers",
   subheadline: "With a 98% satisfaction rate, our community is thriving.",
   testimonials: [
@@ -46,15 +46,15 @@ const HomeSocialProofComponent = () => {
       <div className="container mx-auto max-w-[1000px]">
         {/* Headline */}
         <h2 className="mb-8 text-center text-3xl font-extrabold text-gray-900 sm:text-4xl">
-          {socialProofData.headline}
+          {componentData.headline}
         </h2>
         <p className="mb-12 text-center text-base text-gray-700 sm:text-lg">
-          {socialProofData.subheadline}
+          {componentData.subheadline}
         </p>
 
         {/* Testimonials */}
         <div className="testimonials mb-16 flex grid grid-cols-1 place-items-center gap-8 sm:grid-cols-2 lg:grid-cols-3">
-          {socialProofData.testimonials.map((testimonial, index) => (
+          {componentData.testimonials.map((testimonial, index) => (
             <Card
               key={index}
               className="flex max-w-[400px] flex-col overflow-hidden rounded-lg bg-white p-6 shadow-lg transition-transform hover:scale-105"
@@ -83,7 +83,7 @@ const HomeSocialProofComponent = () => {
 
         {/* Awards Section */}
         <div className="awards mb-16 flex flex-row items-center justify-center gap-8">
-          {socialProofData.awards.map((award, index) => (
+          {componentData.awards.map((award, index) => (
             <div
               key={index}
               className="award flex max-w-[120px] flex-col items-center text-center"
@@ -101,10 +101,10 @@ const HomeSocialProofComponent = () => {
         {/* Explore Case Studies */}
         <div className="case-studies text-center">
           <div
-            onClick={() => navigate(socialProofData.explore.href)}
+            onClick={() => navigate(componentData.explore.href)}
             className="cursor-pointer text-blue-500 underline transition hover:text-blue-700"
           >
-            {socialProofData.explore.title}
+            {componentData.explore.title}
           </div>
         </div>
       </div>

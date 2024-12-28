@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Switch } from "@/components/ui/switch";
 
-const pricingData = {
+const componentData = {
   heading: "Choose Your Plan",
   subheading: "Save 20% with annual billing. No hidden fees, cancel anytime.",
   switchText: {
@@ -51,16 +51,16 @@ const HomePricingComponent = () => {
       <div className="container mx-auto max-w-[1000px] px-6">
         {/* Heading */}
         <h2 className="mb-8 text-center text-3xl font-extrabold text-gray-900 sm:text-4xl">
-          {pricingData.heading}
+          {componentData.heading}
         </h2>
         <p className="mb-8 text-center text-base text-gray-600 sm:text-lg">
-          {pricingData.subheading}
+          {componentData.subheading}
         </p>
 
         {/* Toggle Switch */}
         <div className="mb-10 flex flex-wrap items-center justify-center gap-4">
           <span className="font-medium text-gray-700">
-            {pricingData.switchText.prefix}
+            {componentData.switchText.prefix}
           </span>
           <Switch
             checked={isAnnual}
@@ -68,13 +68,13 @@ const HomePricingComponent = () => {
             className="transition-transform"
           />
           <span className="font-medium text-gray-700">
-            {pricingData.switchText.postfix}
+            {componentData.switchText.postfix}
           </span>
         </div>
 
         {/* Plans */}
         <div className="flex flex-wrap justify-center gap-6">
-          {pricingData.plans.map((plan) => (
+          {componentData.plans.map((plan) => (
             <div
               key={plan.name}
               className={`w-full max-w-[300px] rounded-lg border ${
@@ -125,19 +125,19 @@ const HomePricingComponent = () => {
               <div className="px-6 pb-6 text-center">
                 <Button
                   variant={
-                    plan.name === pricingData.mostPopular.planName
+                    plan.name === componentData.mostPopular.planName
                       ? "default"
                       : "outline"
                   }
                   className="w-full"
                 >
-                  {plan.name === pricingData.mostPopular.planName
+                  {plan.name === componentData.mostPopular.planName
                     ? "Get Started"
                     : `Choose ${plan.name}`}
                 </Button>
-                {plan.name === pricingData.mostPopular.planName && (
+                {plan.name === componentData.mostPopular.planName && (
                   <p className="mt-2 text-sm font-medium text-teal-600">
-                    {pricingData.mostPopular.text}
+                    {componentData.mostPopular.text}
                   </p>
                 )}
               </div>

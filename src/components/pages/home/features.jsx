@@ -8,7 +8,7 @@ import {
 
 import { Card, CardHeader, CardContent, CardTitle } from "@/components/ui/card";
 
-const featuresData = {
+const componentData = {
   title: "Discover Our Key Benefits",
   cards: [
     {
@@ -47,12 +47,12 @@ const HomeFeaturesComponent = () => {
       <div className="m-auto flex max-w-[1000px] flex-col items-center">
         {/* Section Title */}
         <h2 className="mb-12 text-center text-3xl font-extrabold text-gray-900 sm:text-4xl">
-          {featuresData.title}
+          {componentData.title}
         </h2>
 
         {/* Features Cards */}
         <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
-          {featuresData.cards.map((fd, i) => (
+          {componentData.cards.map((fd, i) => (
             <Card
               key={i}
               className="flex max-w-[400px] flex-col items-center justify-center rounded-lg border border-gray-200 px-6 py-8 transition-shadow duration-300 ease-in-out hover:shadow-2xl"

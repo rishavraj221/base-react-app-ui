@@ -2,7 +2,7 @@ import React from "react";
 
 import { Card, CardHeader, CardContent, CardTitle } from "@/components/ui/card";
 
-const aboutUsData = {
+const componentData = {
   headline: "About Us",
   diary: [
     {
@@ -45,10 +45,10 @@ const HomeAboutUs = () => {
     >
       <div className="mx-auto max-w-[1000px] px-4 sm:px-6 lg:px-8">
         <h2 className="mb-16 text-center text-3xl font-extrabold text-gray-900 md:text-4xl">
-          {aboutUsData.headline}
+          {componentData.headline}
         </h2>
 
-        {aboutUsData.diary.map((aud, i) => (
+        {componentData.diary.map((aud, i) => (
           <div
             key={i}
             className={`mb-16 flex flex-col ${
@@ -77,7 +77,7 @@ const HomeAboutUs = () => {
 
         <div className="flex flex-col items-center justify-center">
           <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
-            {aboutUsData.foundersData.map((founder, index) => (
+            {componentData.foundersData.map((founder, index) => (
               <Card
                 key={index}
                 className="max-w-[400px] transform rounded-lg bg-white p-6 shadow-md transition hover:translate-y-2 hover:shadow-xl"

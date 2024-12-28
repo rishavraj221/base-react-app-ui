@@ -7,7 +7,7 @@ import {
   AccordionContent,
 } from "@/components/ui/accordion";
 
-const faqData = {
+const componentData = {
   headline: "Frequently Asked Questions",
   faqs: [
     {
@@ -33,13 +33,13 @@ const HomeFAQComponent = () => {
     <section id="faq-section" className="bg-gray-50 px-8 py-16">
       <div className="container mx-auto max-w-[1000px]">
         <h2 className="mb-16 text-center text-3xl font-extrabold text-gray-900 md:text-4xl">
-          {faqData.headline}
+          {componentData.headline}
         </h2>
 
         {/* FAQ Accordion */}
         <div className="flex-1">
           <Accordion className="space-y-6">
-            {faqData.faqs.map((fq, i) => (
+            {componentData.faqs.map((fq, i) => (
               <AccordionItem
                 key={i}
                 value={`item-${i + 1}`}

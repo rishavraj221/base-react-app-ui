@@ -36,7 +36,7 @@ const FooterComponent = () => {
 
   return (
     <footer className="flex flex-col items-center justify-center bg-gray-800 px-6 py-12 text-white">
-      <div className="m-auto grid max-w-[1000px] gap-8 md:grid-cols-3">
+      <div className="flex flex-col gap-8 md:w-full md:flex-row md:justify-around lg:w-[1000px]">
         {/* Quick Links */}
         <div>
           {/* <h3 className="mb-2 font-semibold">Quick Links</h3> */}
