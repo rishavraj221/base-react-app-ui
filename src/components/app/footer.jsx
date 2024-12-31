@@ -20,7 +20,7 @@ const footerData = {
     placeholder: "Enter your email",
     buttonText: "Subscribe",
   },
-  copyright: "&copy; 2024 Your Company. All rights reserved.",
+  copyright: "&copy; 2024 Picalive Technologies. All rights reserved.",
 };
 
 const FooterComponent = () => {
@@ -44,7 +44,8 @@ const FooterComponent = () => {
             {footerData.quickLinks.map((link, index) => (
               <li key={index}>
                 <div
-                  onClick={() => navigate(link.href)}
+                  // onClick={() => navigate(link.href)}
+                  onClick={() => alert("coming soon ...")}
                   className="cursor-pointer text-center text-gray-400 hover:text-gray-200 md:text-left"
                 >
                   {link.title}
@@ -64,7 +65,10 @@ const FooterComponent = () => {
                   className="cursor-pointer text-center text-gray-400 hover:text-gray-200 md:text-left"
                   onClick={(e) => {
                     e.preventDefault();
-                    handleSmoothScroll(link.href);
+                    // handleSmoothScroll(link.href);
+                    if (link.title === "Contact Us")
+                      window.open("mailto:rairishav221@gmail.com", "_blank");
+                    else alert("coming soon...");
                   }}
                 >
                   {link.title}
@@ -81,8 +85,9 @@ const FooterComponent = () => {
             {footerData.socialMedia.map((social, index) => (
               <a
                 key={index}
-                href={social.href}
-                className="text-gray-400 hover:text-gray-200"
+                // href={social.href}
+                onClick={() => alert("page coming soon...")}
+                className="cursor-pointer text-gray-400 hover:text-gray-200"
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -94,7 +99,7 @@ const FooterComponent = () => {
       </div>
 
       {/* Newsletter Signup */}
-      <div className="mt-12 text-center">
+      {/* <div className="mt-12 text-center">
         <h3 className="font-semibold">Subscribe to our Newsletter</h3>
         <form className="mt-4 flex justify-center">
           <input
@@ -109,7 +114,7 @@ const FooterComponent = () => {
             {footerData.newsletter.buttonText}
           </button>
         </form>
-      </div>
+      </div> */}
 
       {/* Copyright Information */}
       <div

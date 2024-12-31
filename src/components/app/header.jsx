@@ -82,7 +82,10 @@ const HeaderComponent = () => {
                 className="block cursor-pointer text-gray-700 hover:text-gray-500"
                 onClick={(e) => {
                   e.preventDefault();
-                  handleSmoothScroll(href);
+                  // handleSmoothScroll(href);
+                  if (title === "Contact Us")
+                    window.open("mailto:rairishav221@gmail.com", "_blank");
+                  else alert("coming soon...");
                 }}
               >
                 {title}
@@ -90,9 +93,10 @@ const HeaderComponent = () => {
             ))}
             <Button
               variant="outline"
-              onClick={() =>
-                handleNavigation(headerData.callToActionButton.href)
-              }
+              // onClick={() =>
+              //   handleNavigation(headerData.callToActionButton.href)
+              // }
+              onClick={() => alert("coming soon ...")}
             >
               {headerData.callToActionButton.title}
             </Button>
@@ -124,7 +128,8 @@ const HeaderComponent = () => {
           ))}
           <Button
             variant="outline"
-            onClick={() => handleNavigation(headerData.callToActionButton.href)}
+            // onClick={() => handleNavigation(headerData.callToActionButton.href)}
+            onClick={() => alert("coming soon...")}
           >
             {headerData.callToActionButton.title}
           </Button>
