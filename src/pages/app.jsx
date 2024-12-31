@@ -5,7 +5,7 @@ import Markdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCog } from "@fortawesome/free-solid-svg-icons";
+import { faCog, faExclamation } from "@fortawesome/free-solid-svg-icons";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -22,7 +22,7 @@ import FooterComponent from "@/components/app/footer";
 
 // const API_BASE_URL = "http://localhost:5464";
 const API_BASE_URL = "https://lean.api.picalive.io";
-const TOP_K = 4;
+const TOP_K = 5;
 const SYSTEM_PROMPT =
   "You are an expert in answering the question of the user. \n\nYou will be provided with some relevant text chunks from the document the user's query is being asked from.\n\nGenerate answer only from the provided chunks.\n\nAll the provided chunks may not be helpful, so analyse carefully, process the respective chunk only if it is related to the user's query.\n\nGenerate point wise precise answer. \n\nReturn with the most meaningful response in markdown format.";
 
@@ -40,6 +40,7 @@ const FileConversationPage = () => {
   const [indexData, setIndexData] = useState({
     completed: false,
     running: false,
+    error: false,
     indexName: "",
     message: "",
   });
@@ -102,29 +103,19 @@ const FileConversationPage = () => {
             setMessage(data.content);
           }
 
-          if (data.type === "data") {
+          if (data.type === "data" || data.type === "error") {
             console.log("final temp index", tempIndexData);
             tempIndexData.completed = true;
             tempIndexData.running = false;
             tempIndexData.message = data.content.message;
             tempIndexData.indexName = data.content.index_name;
+            if (data.type === "error") tempIndexData.error = true;
             setIndexData(tempIndexData);
             setMessage(data.content.message);
           }
 
           if (data.type === "done") eventSource.close();
         };
-
-        // const res = await axios.post(`${API_BASE_URL}/index`, formData, {
-        //   headers: {
-        //     "Content-Type": "multipart/form-data",
-        //   },
-        // });
-
-        // if (res.data?.index_name) {
-        //   setIsIndexed(true);
-        //   setIndexName(res.data.index_name);
-        // }
       } catch (error) {
         alert("Failed to index the file. Please try again.");
       } finally {
@@ -214,7 +205,12 @@ const FileConversationPage = () => {
 
               {uploadedFile && (
                 <div className="mt-2 flex items-center space-x-2 text-sm text-green-600">
-                  {indexData.completed ? (
+                  {indexData.error ? (
+                    <FontAwesomeIcon
+                      icon={faExclamation}
+                      className="h-4 w-4 text-red-400"
+                    />
+                  ) : indexData.completed ? (
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       fill="none"
@@ -234,7 +230,11 @@ const FileConversationPage = () => {
                   )}
                   <span
                     className={
-                      indexData.completed ? "text-green-600" : "text-yellow-500"
+                      indexData.error
+                        ? "text-red-400"
+                        : indexData.completed
+                          ? "text-green-600"
+                          : "text-yellow-500"
                     }
                   >
                     {/* {indexData.message} */}
