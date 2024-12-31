@@ -67,7 +67,10 @@ const FooterComponent = () => {
                     e.preventDefault();
                     // handleSmoothScroll(link.href);
                     if (link.title === "Contact Us")
-                      window.open("mailto:rairishav221@gmail.com", "_blank");
+                      window.open(
+                        "mailto:rishavraj@alumni.iitm.ac.in",
+                        "_blank",
+                      );
                     else alert("coming soon...");
                   }}
                 >

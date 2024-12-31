@@ -352,7 +352,7 @@ const FileConversationPage = () => {
                 <span
                   className="cursor-pointer text-blue-600 hover:underline"
                   onClick={() =>
-                    window.open("mailto:rairishav221@gmail.com", "_blank")
+                    window.open("mailto:rishavraj@alumni.iitm.ac.in", "_blank")
                   }
                 >
                   Contact Us
