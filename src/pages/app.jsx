@@ -1,11 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import { CircularProgress } from "@mui/material";
 import Markdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCog, faExclamation } from "@fortawesome/free-solid-svg-icons";
+import {
+  faCog,
+  faExclamation,
+  faCircle,
+} from "@fortawesome/free-solid-svg-icons";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -20,7 +24,7 @@ import { Textarea } from "@/components/ui/textarea";
 import HeaderComponent from "@/components/app/header";
 import FooterComponent from "@/components/app/footer";
 
-// const API_BASE_URL = "http://localhost:5464";
+// const API_BASE_URL = "http://localhost:546";
 const API_BASE_URL = "https://lean.api.picalive.io";
 const TOP_K = 5;
 const SYSTEM_PROMPT =
@@ -49,6 +53,24 @@ const FileConversationPage = () => {
   const [topK, setTopK] = useState(TOP_K);
   const [systemPrompt, setSystemPrompt] = useState(SYSTEM_PROMPT);
   const [message, setMessage] = useState("");
+  const [serverStatus, setServerStatus] = useState({ isUp: true, message: "" });
+
+  const checkServerStatus = useCallback(async () => {
+    try {
+      await axios.get(`${API_BASE_URL}/`);
+      setServerStatus({ isUp: true, message: "" });
+    } catch {
+      setServerStatus({
+        isUp: false,
+        message:
+          "The server is currently unavailable. Want to try our exclusive demo? Contact us now, and we’ll have the server ready for you in no time. Don’t miss out on an amazing experience!",
+      });
+    }
+  }, []);
+
+  useEffect(() => {
+    checkServerStatus();
+  }, []);
 
   const handleFileUpload = async (e) => {
     const file = e.target.files[0];
@@ -187,6 +209,41 @@ const FileConversationPage = () => {
           </CardHeader>
           <CardContent>
             {/* File Upload Section */}
+
+            {serverStatus.isUp ? (
+              <div className="my-2 flex items-center justify-center text-sm font-normal text-green-600">
+                <FontAwesomeIcon icon={faCircle} className="mr-2 h-2 w-2" />
+                <span>Application is live</span>
+              </div>
+            ) : (
+              <div className="mb-4 flex items-center text-sm text-yellow-600">
+                <span>
+                  The server is currently unavailable. Want to try our exclusive
+                  demo?{" "}
+                  <span
+                    onClick={() =>
+                      window.open(
+                        "mailto:rishavraj@alumni.iitm.ac.in",
+                        "_blank",
+                      )
+                    }
+                    className="cursor-pointer font-medium text-blue-600 hover:underline"
+                  >
+                    Contact us
+                  </span>{" "}
+                  or{" "}
+                  <span
+                    onClick={() => window.open("tel:+919798600997", "_blank")}
+                    className="cursor-pointer font-medium text-blue-600 hover:underline"
+                  >
+                    Call us
+                  </span>{" "}
+                  now, and we’ll have the server ready for you in no time. Don’t
+                  miss out on an amazing experience!
+                </span>
+              </div>
+            )}
+
             <div className="mb-6">
               <label
                 htmlFor="pdf-upload"
@@ -200,7 +257,9 @@ const FileConversationPage = () => {
                 accept="application/pdf"
                 className="mt-1 block w-full"
                 onChange={handleFileUpload}
-                disabled={indexData.running || indexData.completed}
+                disabled={
+                  !serverStatus.isUp || indexData.running || indexData.completed
+                }
               />
 
               {uploadedFile && (
@@ -237,7 +296,6 @@ const FileConversationPage = () => {
                           : "text-yellow-500"
                     }
                   >
-                    {/* {indexData.message} */}
                     {message}
                   </span>
                 </div>
