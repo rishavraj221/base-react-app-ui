@@ -211,12 +211,12 @@ const FileConversationPage = () => {
             {/* File Upload Section */}
 
             {serverStatus.isUp ? (
-              <div className="my-2 flex items-center justify-center text-sm font-normal text-green-600">
+              <div className="mb-6 flex items-center justify-center text-sm font-normal text-green-600">
                 <FontAwesomeIcon icon={faCircle} className="mr-2 h-2 w-2" />
                 <span>Application is live</span>
               </div>
             ) : (
-              <div className="mb-4 flex items-center text-sm text-yellow-600">
+              <div className="mb-6 flex items-center text-sm text-yellow-600">
                 <span>
                   The server is currently unavailable. Want to try our exclusive
                   demo?{" "}
