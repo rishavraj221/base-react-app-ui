@@ -53,10 +53,15 @@ const FileConversationPage = () => {
   const [topK, setTopK] = useState(TOP_K);
   const [systemPrompt, setSystemPrompt] = useState(SYSTEM_PROMPT);
   const [message, setMessage] = useState("");
-  const [serverStatus, setServerStatus] = useState({ isUp: true, message: "" });
+  const [serverStatus, setServerStatus] = useState({
+    isUp: false,
+    message: "",
+  });
+  const [checkingServerStatus, setCheckingServerStatus] = useState(false);
 
   const checkServerStatus = useCallback(async () => {
     try {
+      setCheckingServerStatus(true);
       await axios.get(`${API_BASE_URL}/`);
       setServerStatus({ isUp: true, message: "" });
     } catch {
@@ -65,6 +70,8 @@ const FileConversationPage = () => {
         message:
           "The server is currently unavailable. Want to try our exclusive demo? Contact us now, and we’ll have the server ready for you in no time. Don’t miss out on an amazing experience!",
       });
+    } finally {
+      setCheckingServerStatus(false);
     }
   }, []);
 
