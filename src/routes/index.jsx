@@ -9,12 +9,11 @@ import FileConversationPage from "../pages/app";
 const AppRoutes = () => {
   return (
     <Routes>
-      <Route path="/" element={<FileConversationPage />} />
-      <Route path="/landing-page" element={<LandingPage />} />
+      <Route path="/" element={<LandingPage />} />
+      <Route path="/demo" element={<FileConversationPage />} />
       <Route path="/login" element={<LoginPage />} />
       <Route path="/signup" element={<SignupPage />} />
       <Route path="/forgot-password" element={<ForgotPasswordPage />} />
-      {/* <Route path="/app" element={<FileConversationPage />} /> */}
     </Routes>
   );
 };
