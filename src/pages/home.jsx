@@ -24,18 +24,18 @@ const pageData = {
       name: "Features",
       render: <HomeFeaturesComponent />,
     },
-    {
-      name: "SocialProof",
-      render: <HomeSocialProofComponent />,
-    },
+    // {
+    //   name: "SocialProof",
+    //   render: <HomeSocialProofComponent />,
+    // },
     {
       name: "AboutUs",
       render: <HomeAboutUs />,
     },
-    {
-      name: "Pricing",
-      render: <HomePricingComponent />,
-    },
+    // {
+    //   name: "Pricing",
+    //   render: <HomePricingComponent />,
+    // },
     {
       name: "ContactUs",
       render: <HomeContactUsComponent />,

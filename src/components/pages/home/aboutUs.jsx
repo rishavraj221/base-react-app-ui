@@ -8,31 +8,31 @@ const componentData = {
     {
       title: "Our Mission",
       subtitle:
-        "To lead innovation in the tech industry with creativity and passion, staying ahead of technological advancements to deliver unrivaled solutions.",
+        "To empower users with a multi-agent software that continuously tracks and extracts information from various sources, providing results in the formats and channels of their choice.",
       image: "mission.svg",
     },
     {
       title: "Our Story",
       subtitle:
-        "Established in 2000, we have expanded from a small tech firm to a global technology leader, committed to making a difference through innovative solutions.",
+        "Founded by three innovators from prestigious institutions including Trinity College and IITM, Source Bot was created to solve the challenges faced in building comprehensive applications for information extraction and tracking.",
       image: "story.svg",
     },
   ],
   foundersData: [
     {
-      name: "Founder1",
+      name: "Mayank Sharma",
       image: "16.png",
-      role: "CEO - Steering the company with strategic foresight.",
+      role: "Scientist turned entrepreneur, dedicated to innovation in software development.",
     },
     {
-      name: "Founder2",
+      name: "Ishani Bhushan",
       image: "14.png",
-      role: "CTO - Leading technological innovations with a forefront vision.",
+      role: "A visionary leader with a commitment to building impactful technology solutions.",
     },
     {
-      name: "Founder3",
-      image: "15.png",
-      role: "COO - Managing operations efficiently to achieve excellence.",
+      name: "Rishav Raj",
+      image: "13.png",
+      role: "Alumnus of IITM, bringing extensive experience in tech and innovation.",
     },
   ],
 };

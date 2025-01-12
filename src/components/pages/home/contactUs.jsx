@@ -2,6 +2,13 @@ import React from "react";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 
 const HomeContactUsComponent = () => {
@@ -16,6 +23,24 @@ const HomeContactUsComponent = () => {
           {/* Contact Form */}
           <div className="flex-1">
             <form className="space-y-6">
+              <div>
+                <label
+                  htmlFor="product"
+                  className="mb-1 block text-sm font-medium text-gray-700"
+                >
+                  Product
+                </label>
+                <Select>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Product" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="SDLC">SDLC</SelectItem>
+                    <SelectItem value="Source Bot">Source Bot</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+
               <div>
                 <label
                   htmlFor="name"

@@ -1,16 +1,16 @@
 import React from "react";
 
 const componentData = {
-  headline: "Revolutionize Your Workflow",
+  headline: "Accelerate Your Development Lifecycle",
   subheadine:
-    "Simplify your tasks and maximize productivity with our innovative solutions, designed for modern teams.",
+    "From code writing to health reports—focus on features while we handle the rest.",
   heroMedia: {
     type: "image",
     src: "/hero.svg",
     alt: "Hero Visual",
   },
   ctaButton: {
-    title: "Get Started",
+    title: "Learn More",
     onClick: () => {},
   },
   trustedLogos: [
@@ -27,7 +27,7 @@ const componentData = {
       alt: "Logo3",
     },
   ],
-  trustedText: "Trusted by 10,000+ customers",
+  trustedText: "Trusted by 10,000+ people",
 };
 
 const HomeHeroComponent = () => {
@@ -47,14 +47,14 @@ const HomeHeroComponent = () => {
           >
             {componentData.ctaButton.title}
           </button>
-          <div className="mt-8 flex items-center justify-center space-x-4 md:justify-start">
+          {/* <div className="mt-8 flex items-center justify-center space-x-4 md:justify-start">
             {componentData.trustedLogos.map((tl, i) => (
               <img key={i} src={tl.src} alt={tl.alt} className="h-8" />
             ))}
             <span className="text-sm text-gray-500">
               {componentData.trustedText}
             </span>
-          </div>
+          </div> */}
         </div>
 
         <div className="w-full md:w-1/2">

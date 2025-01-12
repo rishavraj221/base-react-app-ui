@@ -4,37 +4,32 @@ import { useNavigate } from "react-router-dom";
 import { Card, CardHeader, CardContent } from "@/components/ui/card";
 
 const componentData = {
-  headline: "Trusted by Over 10,000 Happy Customers",
-  subheadline: "With a 98% satisfaction rate, our community is thriving.",
+  headline: "Empowering Development Teams Worldwide",
+  subheadline: "Join over 15,000 teams achieving success with SDLC Builder.",
   testimonials: [
     {
-      name: "John Doe",
-      feedback:
-        "This product changed my life! The quality and support are outstanding.",
-      image: "/13.png",
+      name: "Alice Johnson",
+      feedback: "SDLC Builder transformed our workflow! The efficiency is remarkable.",
+      image: "/alice.png",
     },
     {
-      name: "Jane Smith",
-      feedback:
-        "A wonderful experience from start to finish. Highly recommend!",
-      image: "/14.png",
+      name: "Michael Brown",
+      feedback: "We streamlined our processes significantly. Highly useful tool for developers!",
+      image: "/michael.png",
     },
     {
-      name: "Jack Ma",
-      feedback: "A wonderful experience from start to finish. Good to have!",
-      image: "/15.png",
+      name: "Sara Wilson",
+      feedback: "A game-changer for team collaboration. We can now complete projects faster.",
+      image: "/sara.png",
     },
   ],
   awards: [
-    { name: "Best Product 2023", logo: "/iso_cert.png" },
-    {
-      name: "Innovative Design Award",
-      logo: "/soc_cert.png",
-    },
+    { name: "Best DevOps Tool 2023", logo: "/devops_award.png" },
+    { name: "Most Innovative Software", logo: "/innovation_award.png" },
   ],
   explore: {
-    title: "Explore our case studies",
-    href: "/case-studies",
+    title: "Discover our success stories",
+    href: "/success-stories",
   },
 };
 
@@ -70,7 +65,7 @@ const HomeSocialProofComponent = () => {
                     {testimonial.name}
                   </div>
                   <span className="text-sm text-gray-500">
-                    {testimonial.role}
+                    Developer
                   </span>
                 </div>
               </CardHeader>
