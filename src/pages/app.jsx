@@ -24,7 +24,7 @@ import { Textarea } from "@/components/ui/textarea";
 import HeaderComponent from "@/components/app/header";
 import FooterComponent from "@/components/app/footer";
 
-// const API_BASE_URL = "http://localhost:546";
+// const API_BASE_URL = "http://localhost:5464";
 const API_BASE_URL = "https://lean.api.picalive.io";
 const TOP_K = 5;
 const SYSTEM_PROMPT =
@@ -132,18 +132,18 @@ const FileConversationPage = () => {
             setMessage(data.content);
           }
 
-          if (data.type === "data" || data.type === "error") {
+          if (data.type === "done" || data.type === "error") {
+            eventSource.close();
+
             console.log("final temp index", tempIndexData);
             tempIndexData.completed = true;
             tempIndexData.running = false;
-            tempIndexData.message = data.content.message;
+            tempIndexData.message = "File indexed, you can now ask questions!";
             tempIndexData.indexName = data.content.index_name;
             if (data.type === "error") tempIndexData.error = true;
             setIndexData(tempIndexData);
-            setMessage(data.content.message);
+            setMessage(tempIndexData.message);
           }
-
-          if (data.type === "done") eventSource.close();
         };
       } catch (error) {
         alert("Failed to index the file. Please try again.");
@@ -168,9 +168,11 @@ const FileConversationPage = () => {
 
         tempLLMConversation[0].content = systemPrompt;
 
+        console.log(uploadedFile);
+
         const res = await axios.post(`${API_BASE_URL}/search`, {
           query: question,
-          index_name: indexData.indexName,
+          file_name: uploadedFile.name,
           top_k: topK,
           system_prompt: systemPrompt,
           conversation: tempLLMConversation,
