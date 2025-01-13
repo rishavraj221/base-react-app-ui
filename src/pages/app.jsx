@@ -27,8 +27,8 @@ import { Textarea } from "@/components/ui/textarea";
 import HeaderComponent from "@/components/app/header";
 import FooterComponent from "@/components/app/footer";
 
-const API_BASE_URL = "http://localhost:5464";
-// const API_BASE_URL = "https://lean.api.picalive.io";
+// const API_BASE_URL = "http://localhost:5464";
+const API_BASE_URL = "https://lean.api.picalive.io";
 const TOP_K = 5;
 const SYSTEM_PROMPT =
   "You are an expert in answering the question of the user. \n\nYou will be provided with some relevant text chunks from the document the user's query is being asked from.\n\nGenerate answer only from the provided chunks.\n\nAll the provided chunks may not be helpful, so analyse carefully, process the respective chunk only if it is related to the user's query.\n\nGenerate point wise precise answer. \n\nReturn with the most meaningful response in markdown format.";
@@ -201,7 +201,21 @@ const FileConversationPage = () => {
 
         setLLMConversation(tempLLMConversation);
       } catch (error) {
-        alert("Failed to get a response. Please try again.");
+        if (error?.response?.data?.error_tracking_code === "444") {
+          const tempConversation = [...conversation];
+          tempConversation.push({
+            role: "error",
+            content: error?.response?.data?.error_message,
+          });
+          s;
+          setConversation(tempConversation);
+
+          const tempIndexData = { ...indexData };
+          tempIndexData.error = true;
+          tempIndexData.message = error?.response?.data?.error_message;
+          setMessage(tempIndexData.message);
+          setIndexData(tempIndexData);
+        } else alert("Something went wrong, please try again later");
       } finally {
         setIsAnswering(false);
         setQuestion("");
@@ -377,7 +391,9 @@ const FileConversationPage = () => {
                       className={`max-w-lg overflow-x-scroll rounded-lg px-4 py-2 text-sm ${
                         msg.role === "user"
                           ? "bg-blue-600 text-white"
-                          : "my-4 text-left text-gray-600 shadow-md"
+                          : msg.role === "error"
+                            ? "bg-red-100 text-red-600"
+                            : "my-4 text-left text-gray-600 shadow-md"
                       }`}
                     >
                       <Markdown
@@ -386,8 +402,6 @@ const FileConversationPage = () => {
                       >
                         {msg.content}
                       </Markdown>
-
-                      {/* {msg.content} */}
                     </div>
                   </div>
                 ))}
