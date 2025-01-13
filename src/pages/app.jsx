@@ -3,6 +3,9 @@ import { useNavigate } from "react-router-dom";
 import { CircularProgress } from "@mui/material";
 import Markdown from "react-markdown";
 import remarkGfm from "remark-gfm";
+import remarkMath from "remark-math";
+import rehypeKatex from "rehype-katex";
+import "katex/dist/katex.min.css";
 import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -24,8 +27,8 @@ import { Textarea } from "@/components/ui/textarea";
 import HeaderComponent from "@/components/app/header";
 import FooterComponent from "@/components/app/footer";
 
-// const API_BASE_URL = "http://localhost:5464";
-const API_BASE_URL = "https://lean.api.picalive.io";
+const API_BASE_URL = "http://localhost:5464";
+// const API_BASE_URL = "https://lean.api.picalive.io";
 const TOP_K = 5;
 const SYSTEM_PROMPT =
   "You are an expert in answering the question of the user. \n\nYou will be provided with some relevant text chunks from the document the user's query is being asked from.\n\nGenerate answer only from the provided chunks.\n\nAll the provided chunks may not be helpful, so analyse carefully, process the respective chunk only if it is related to the user's query.\n\nGenerate point wise precise answer. \n\nReturn with the most meaningful response in markdown format.";
@@ -138,7 +141,10 @@ const FileConversationPage = () => {
             console.log("final temp index", tempIndexData);
             tempIndexData.completed = true;
             tempIndexData.running = false;
-            tempIndexData.message = "File indexed, you can now ask questions!";
+            tempIndexData.message =
+              data.type === "error"
+                ? "Something went wrong, please try again later"
+                : "File indexed, you can now ask questions!";
             tempIndexData.indexName = data.content.index_name;
             if (data.type === "error") tempIndexData.error = true;
             setIndexData(tempIndexData);
@@ -374,13 +380,14 @@ const FileConversationPage = () => {
                           : "my-4 text-left text-gray-600 shadow-md"
                       }`}
                     >
-                      {msg.role === "assistant" ? (
-                        <Markdown remarkPlugins={[remarkGfm]}>
-                          {msg.content}
-                        </Markdown>
-                      ) : (
-                        msg.content
-                      )}
+                      <Markdown
+                        remarkPlugins={[remarkMath, remarkGfm]} // Include both plugins
+                        rehypePlugins={[rehypeKatex]}
+                      >
+                        {msg.content}
+                      </Markdown>
+
+                      {/* {msg.content} */}
                     </div>
                   </div>
                 ))}
@@ -401,12 +408,22 @@ const FileConversationPage = () => {
                 value={question}
                 onChange={(e) => setQuestion(e.target.value)}
                 className="mt-4 block w-full"
-                disabled={!indexData.completed || isAnswering}
+                disabled={
+                  indexData.error || !indexData.completed || isAnswering
+                }
+                onKeyDown={(e) => {
+                  if (e.key === "Enter" && !e.shiftKey) {
+                    e.preventDefault();
+                    handleAskQuestion(e);
+                  }
+                }}
               />
               <Button
                 type="submit"
                 className="w-full"
-                disabled={!indexData.completed || isAnswering}
+                disabled={
+                  indexData.error || !indexData.completed || isAnswering
+                }
               >
                 Ask Question
               </Button>
