@@ -30,8 +30,7 @@ import FooterComponent from "@/components/app/footer";
 // const API_BASE_URL = "http://localhost:5464";
 const API_BASE_URL = "https://lean.api.picalive.io";
 const TOP_K = 5;
-const SYSTEM_PROMPT =
-  "You are an expert in answering the question of the user. \n\nYou will be provided with some relevant text chunks from the document the user's query is being asked from.\n\nGenerate answer only from the provided chunks.\n\nAll the provided chunks may not be helpful, so analyse carefully, process the respective chunk only if it is related to the user's query.\n\nGenerate point wise precise answer. \n\nReturn with the most meaningful response in markdown format.";
+const SYSTEM_PROMPT = `You are an expert in answering the question of the user. \n\nYou will be provided with some relevant text chunks from the document the user's query is being asked from.\n\nGenerate answer only from the provided chunks.\n\nAll the provided chunks may not be helpful, so analyse carefully, process the respective chunk only if it is related to the user's query.\n\nGenerate point wise precise answer. \n\nReturn with the most meaningful response in markdown format.\n\nBlock math should be enclosed in double dollar signs ($$), like this:\n\n$$\nE_q := \text{Normalize}(\text{CNN}(\text{BERT}("[Q]q_0q_1...q_l##...#")))\n$$\n\nFor example:\n\nTo compute the bag of embeddings for a query $q$, we define:\n\n$$\nE_q := \text{Normalize}(\text{CNN}(\text{BERT}("[Q]q_0q_1...q_l##...#")))\n$$\n\nFor a document $d$, we compute:\n\n$$\nE_d := \text{Filter}(\text{Normalize}(\text{CNN}(\text{BERT}("[D]d_0d_1...d_n"))))\n$$`;
 
 const FileConversationPage = () => {
   const navigate = useNavigate();
