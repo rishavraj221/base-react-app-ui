@@ -1,25 +1,15 @@
 import React, { useState } from "react";
 
 import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardHeader,
-  CardDescription,
-  CardContent,
-  CardTitle,
-  CardFooter,
-} from "@/components/ui/card";
+import { Card, CardDescription } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Badge } from "@/components/ui/badge";
-import { Table } from "@/components/ui/table";
-import { Progress } from "@/components/ui/progress";
 import axios from "axios";
-import { CircularProgress } from "@mui/material";
 import { Loader2, ExternalLink } from "lucide-react";
 
-const API_BASE_URL = "http://localhost:5465";
-const BUSINESS_ANALYSER_ENDPOINT = "/business-analyser";
+// const API_BASE_URL = "http://localhost:5465";
+const API_BASE_URL = "https://lead.picalive.io";
 const SAVE_DATA_ENDPOINT = "/save-data";
 const SCRAPE_SSE_ENDPOINT = "/scrape-sse";
 
