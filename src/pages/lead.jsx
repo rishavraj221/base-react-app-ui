@@ -9,7 +9,7 @@ import axios from "axios";
 import { Loader2, ExternalLink } from "lucide-react";
 
 // const API_BASE_URL = "http://localhost:5465";
-const API_BASE_URL = "https://lead.picalive.io";
+const API_BASE_URL = "https://lead.api.picalive.io";
 const SAVE_DATA_ENDPOINT = "/save-data";
 const SCRAPE_SSE_ENDPOINT = "/scrape-sse";
 
